@@ -1,10 +1,22 @@
+
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:hydromon/Common/routes.dart';
 import 'package:hydromon/view/Logins/Login.dart';
 import 'package:hydromon/view/Logins/LoginEmail.dart';
 import 'package:hydromon/view/Registers/RegisterEmail.dart';
 
-void main() {
-  runApp(const RegisterEmail());
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp( const MaterialApp(
+    initialRoute: '/',
+    onGenerateRoute: RouteGenerator.generateRoute,
+  ));
 
 }
 

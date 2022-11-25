@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "713350924154",
+    "firebase_url": "https://hydromon-backend-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "hydromon-backend",
+    "storage_bucket": "hydromon-backend.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:713350924154:android:69c444f423ef6646e078c3",
+        "android_client_info": {
+          "package_name": "com.example.hydromon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "713350924154-0bg0d5s9j61ggsigp2akcc0o7vl0ul70.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5sUXHZKiEUR9CL6PI54x314pI8AE3BXI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "713350924154-0bg0d5s9j61ggsigp2akcc0o7vl0ul70.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "713350924154-sr0nmli3fb6r59glkor9ptempud9latn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "me.danielandrewr.Hydromon-iOS"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

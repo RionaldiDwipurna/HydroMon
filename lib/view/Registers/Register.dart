@@ -54,7 +54,9 @@ class _RegisterState extends State<Register> {
                   ),
 
                   child:  GestureDetector(
-                    onTap: (){},
+                    onTap: (){
+                      Navigator.of(context).pushNamed('/RegisterEmail');
+                    },
                     child: Center(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -112,21 +114,28 @@ class _RegisterState extends State<Register> {
 
                 const SizedBox(height: 40,),
 
-                Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children:  [
-                      const Text(
-                        'Sudah pernah daftar? ',
-                      ),
-                      GestureDetector(
-                        onTap: (){},
-                        child: const Text(
-                          'Masuk dengan akun',
-                          style: TextStyle(color: Color(0xFF039189), fontWeight: FontWeight.bold),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.of(context).pushNamed('/Login');
+                  },
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children:  [
+                        const Text(
+                          'Sudah pernah daftar? ',
                         ),
-                      ),
-                    ],
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.pushNamed(context, '/Login');
+                          },
+                          child: const Text(
+                            'Masuk dengan akun',
+                            style: TextStyle(color: Color(0xFF039189), fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
 

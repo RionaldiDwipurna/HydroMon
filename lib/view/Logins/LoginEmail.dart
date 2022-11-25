@@ -27,9 +27,14 @@ class _LoginEmailState extends State<LoginEmail> {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
-          leading: const Icon(
-            Icons.arrow_back,
-            color: Color(0xFF039189),
+          leading: GestureDetector(
+            onTap: (){
+              Navigator.pop(context);
+            },
+            child: const Icon(
+              Icons.arrow_back,
+              color: Color(0xFF039189),
+            ),
           ),
         ),
         body: Padding(

@@ -1,5 +1,10 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import '../../firebase_options.dart';
+
 
 class RegisterEmail extends StatefulWidget {
   const RegisterEmail({Key? key}) : super(key: key);
@@ -9,15 +14,108 @@ class RegisterEmail extends StatefulWidget {
 }
 
 class _RegisterEmailState extends State<RegisterEmail> {
+  var edtEMAIL = TextEditingController();
+  var edtPASSW = TextEditingController();
+  var edtNAME = TextEditingController();
+  var edtCPASSW = TextEditingController();
+
+
+  Future regisUser() async{
+    String mssg = "";
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) =>  const Center(child: CircularProgressIndicator(),)
+    );
+    try{
+      final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: edtEMAIL.text.trim(),
+          password: edtCPASSW.text.trim(),
+      );
+      print(userCredential);
+
+      Navigator.of(context).pop();
+      Navigator.of(context).pushNamed('/Login');
+    }on FirebaseAuthException catch (e){
+      switch(e.code){
+        case 'email-alreadyl-in-use':
+          mssg = 'Email already in use';
+          break;
+        case 'invalid-email':
+          mssg = 'Invalid email address';
+          break;
+        case 'operation-not-allowed':
+          mssg = 'Operation not allowd';
+          break;
+        case 'weak-password':
+          mssg = 'weak password';
+          break;
+        default:
+          print("gagal");
+          break;
+      }
+      print(e);
+      Navigator.of(context).pop();
+
+      errorMsg(mssg);
+    }
+  }
+
+  void errorMsg(String mssg){
+    showDialog(context: context, builder: (context){
+      return AlertDialog(
+        title: const Text('Error'),
+        content:  Text('Failed to Register ' + mssg),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'OK'),
+            child: const Text('OK'),
+          ),
+        ],
+       );
+      }
+    );
+  }
+
+  void validate(String email, String password){
+
+
+
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    edtCPASSW.dispose();
+    edtEMAIL.dispose();
+    edtPASSW.dispose();
+    edtNAME.dispose();
+    super.dispose();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           backgroundColor: Colors.white,
-          leading: const Icon(
-            Icons.arrow_back,
-            color: Color(0xFF039189),
+          leading: GestureDetector(
+            onTap: (){
+              Navigator.pop(context);
+            },
+            child: const Icon(
+              Icons.arrow_back,
+              color: Color(0xFF039189),
+            ),
           ),
         ),
         body: Padding(
@@ -47,6 +145,7 @@ class _RegisterEmailState extends State<RegisterEmail> {
                         hintStyle: TextStyle(color: Colors.grey[800]),
                         hintText: "Nama (4-20 Karakter)",
                         fillColor: Colors.white70),
+                    controller: edtNAME,
                   ),
                 ),
                 Container(
@@ -60,10 +159,13 @@ class _RegisterEmailState extends State<RegisterEmail> {
                         hintStyle: TextStyle(color: Colors.grey[800]),
                         hintText: "Email",
                         fillColor: Colors.white70),
+                    controller: edtEMAIL,
                   ),
                 ),
                 Container(
                   child: TextFormField(
+                    enableSuggestions: false,
+                    autocorrect: false,
                     obscureText: true,
                     validator: (value) {
                       if (value == null || value.isEmpty || value.length < 6) {
@@ -80,6 +182,7 @@ class _RegisterEmailState extends State<RegisterEmail> {
                         hintStyle: TextStyle(color: Colors.grey[800]),
                         hintText: "Password (Minimal 6 karakter)",
                         fillColor: Colors.white70),
+                    controller: edtPASSW,
                   ),
                 ),
 
@@ -87,6 +190,8 @@ class _RegisterEmailState extends State<RegisterEmail> {
 
                 Container(
                   child: TextFormField(
+                    enableSuggestions: false,
+                    autocorrect: false,
                     obscureText: true,
                     validator: (value) {
                       if (value == null || value.isEmpty || value.length < 6) {
@@ -103,13 +208,14 @@ class _RegisterEmailState extends State<RegisterEmail> {
                         hintStyle: TextStyle(color: Colors.grey[800]),
                         hintText: "Ulangi Password",
                         fillColor: Colors.white70),
+                    controller: edtCPASSW,
                   ),
                 ),
 
                 SizedBox(height: 40,),
 
                 GestureDetector(
-                  onTap: (){},
+                  onTap: regisUser,
                   child: Container(
                     decoration: const BoxDecoration(
                       color: Color(0xFFA1DFD7),

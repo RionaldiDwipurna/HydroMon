@@ -53,7 +53,9 @@ class LoginState extends State<Login> {
                   ),
 
                   child:  GestureDetector(
-                    onTap: (){},
+                    onTap: (){
+                      Navigator.of(context).pushNamed('/LoginEmail');
+                    },
                     child: Center(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -119,7 +121,9 @@ class LoginState extends State<Login> {
                         'Belum punya akun? ',
                       ),
                       GestureDetector(
-                        onTap: (){},
+                        onTap: (){
+                          Navigator.of(context).pushNamed('/Register');
+                        },
                         child: const Text(
                           'Daftar sekarang',
                           style: TextStyle(color: Color(0xFF039189), fontWeight: FontWeight.bold),
