@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hydromon/service/LoginAuth.dart';
 
 import '../../firebase_options.dart';
 
@@ -20,32 +21,30 @@ class _RegisterEmailState extends State<RegisterEmail> {
   var edtCPASSW = TextEditingController();
 
 
+
   Future regisUser() async{
     String mssg = "";
+    authUser registerUser = authUser();
     showDialog(
         context: context,
         barrierDismissible: false,
         builder: (context) =>  const Center(child: CircularProgressIndicator(),)
     );
     try{
-      final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: edtEMAIL.text.trim(),
-          password: edtCPASSW.text.trim(),
-      );
-      print(userCredential);
-
+      await registerUser.regisUser(edtEMAIL.text.trim(), edtPASSW.text.trim(), edtNAME.text.trim());
+      if (!mounted) return;
       Navigator.of(context).pop();
       Navigator.of(context).pushNamed('/Login');
     }on FirebaseAuthException catch (e){
       switch(e.code){
-        case 'email-alreadyl-in-use':
+        case 'email-already-in-use':
           mssg = 'Email already in use';
           break;
         case 'invalid-email':
           mssg = 'Invalid email address';
           break;
         case 'operation-not-allowed':
-          mssg = 'Operation not allowd';
+          mssg = 'Operation not allowed';
           break;
         case 'weak-password':
           mssg = 'weak password';
@@ -56,7 +55,6 @@ class _RegisterEmailState extends State<RegisterEmail> {
       }
       print(e);
       Navigator.of(context).pop();
-
       errorMsg(mssg);
     }
   }

@@ -4,7 +4,7 @@ import 'package:hydromon/view/Registers/RegisterEmail.dart';
 
 import '../view/Logins/Login.dart';
 import '../view/Registers/Register.dart';
-import '../view/Screen/WaterTank.dart';
+import '../view/Screen/HomeScreen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -20,8 +20,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => Register());
       case '/RegisterEmail':
         return MaterialPageRoute(builder: (_) => RegisterEmail());
-      case '/WaterTank':
-        return MaterialPageRoute(builder: (_) => WaterTank());
+      case '/HomeScreen':
+        return MaterialPageRoute(builder: (_) => HomeScreen());
     // return MaterialPageRoute(builder: (_) => AboutPage(args));
       default:
         return _errorRoute();

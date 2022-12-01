@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../../service/LoginAuth.dart';
 
 class LoginEmail extends StatefulWidget {
   const LoginEmail({Key? key}) : super(key: key);
@@ -11,8 +14,8 @@ class LoginEmail extends StatefulWidget {
 
 class _LoginEmailState extends State<LoginEmail> {
   bool _obscureText = true;
-  final _inputEmail = TextEditingController();
-  final _inputPassword = TextEditingController();
+  var edtEMAIL = TextEditingController();
+  var edtPASSW = TextEditingController();
 
 
   void  _toggle(){
@@ -20,6 +23,60 @@ class _LoginEmailState extends State<LoginEmail> {
       _obscureText = !_obscureText;
     });
   }
+  Future loginUser() async {
+    String mssg = "";
+    authUser registerUser = authUser();
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) =>  const Center(child: CircularProgressIndicator(),)
+    );
+    try{
+      await registerUser.loginUser(edtEMAIL.text.trim(), edtPASSW.text.trim());
+      if (!mounted) return;
+      Navigator.of(context).pop();
+      Navigator.of(context).pushNamed('/HomeScreen');
+    } on FirebaseAuthException catch (e){
+      switch(e.code){
+        case 'wrong-password':
+          mssg = 'Wrong password!';
+          break;
+        case 'invalid-email':
+          mssg = 'Invalid email address';
+          break;
+        case 'user-disabled':
+          mssg = 'User is disabled';
+          break;
+        case 'user-not-found':
+          mssg = 'User not Found';
+          break;
+        default:
+          print("gagal");
+          break;
+      }
+      print(e);
+      Navigator.of(context).pop();
+      errorMsg(mssg);
+
+    }
+  }
+  void errorMsg(String mssg){
+    showDialog(context: context, builder: (context){
+      return AlertDialog(
+        title: const Text('Error'),
+        content:  Text('Failed to Login ' + mssg),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'OK'),
+            child: const Text('OK'),
+          ),
+        ],
+      );
+    }
+    );
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +113,7 @@ class _LoginEmailState extends State<LoginEmail> {
                 Container(
                   padding: EdgeInsets.only(bottom: 20),
                   child: TextFormField(
+                    controller: edtEMAIL,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),
@@ -68,6 +126,7 @@ class _LoginEmailState extends State<LoginEmail> {
                 ),
                 Container(
                   child: TextFormField(
+                    controller: edtPASSW,
                     obscureText: true,
                     validator: (value) {
                       if (value == null || value.isEmpty || value.length < 6) {
@@ -89,7 +148,7 @@ class _LoginEmailState extends State<LoginEmail> {
                 SizedBox(height: 40,),
 
                 GestureDetector(
-                  onTap: (){},
+                  onTap: loginUser,
                   child: Container(
                     decoration: const BoxDecoration(
                         color: Color(0xFFA1DFD7),

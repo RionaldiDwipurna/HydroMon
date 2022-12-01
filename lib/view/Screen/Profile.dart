@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class WaterTank extends StatefulWidget {
-  const WaterTank({Key? key}) : super(key: key);
+class Profile extends StatefulWidget {
+  const Profile({Key? key}) : super(key: key);
 
   @override
-  State<WaterTank> createState() => _WaterTankState();
+  State<Profile> createState() => _ProfileState();
 }
 
-class _WaterTankState extends State<WaterTank> {
+class _ProfileState extends State<Profile> {
   int _selectedIndex = 0;
 
   List<Widget> pageList = [
@@ -23,7 +23,7 @@ class _WaterTankState extends State<WaterTank> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Text('Test'),
+      home: Text('Test2'),
     );
   }
 }
