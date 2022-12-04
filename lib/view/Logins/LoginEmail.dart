@@ -25,14 +25,14 @@ class _LoginEmailState extends State<LoginEmail> {
   }
   Future loginUser() async {
     String mssg = "";
-    authUser registerUser = authUser();
+    AuthUser loginService = AuthUser();
     showDialog(
         context: context,
         barrierDismissible: false,
         builder: (context) =>  const Center(child: CircularProgressIndicator(),)
     );
     try{
-      await registerUser.loginUser(edtEMAIL.text.trim(), edtPASSW.text.trim());
+      await loginService.loginUser(edtEMAIL.text.trim(), edtPASSW.text.trim());
       if (!mounted) return;
       Navigator.of(context).pop();
       Navigator.of(context).pushNamed('/HomeScreen');

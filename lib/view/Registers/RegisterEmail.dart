@@ -24,7 +24,7 @@ class _RegisterEmailState extends State<RegisterEmail> {
 
   Future regisUser() async{
     String mssg = "";
-    authUser registerUser = authUser();
+    AuthUser registerUser = AuthUser();
     showDialog(
         context: context,
         barrierDismissible: false,

@@ -1,23 +1,26 @@
 
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
+import 'package:hydromon/model/UserData.dart';
 
-class authUser{
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+class AuthUser{
+  final auth.FirebaseAuth _auth = auth.FirebaseAuth.instance;
+
+  Users? _getUserFromFirebase(auth.User? user){
+    return user != null ? Users(UID: user.uid) : null;
+  }
 
   Future regisUser(String regisEmail, String regisPassword, String name) async{
-    String mssg = "";
     try{
-      UserCredential result = await _auth.createUserWithEmailAndPassword(
+      auth.UserCredential result = await _auth.createUserWithEmailAndPassword(
         email: regisEmail,
         password: regisPassword,
       );
-      User? user = result.user;
+      auth.User? user = result.user;
       await user?.updateDisplayName(name);
 
-
-    }on FirebaseAuthException catch (e){
+    }on auth.FirebaseAuthException catch (e){
       print(e);
       rethrow;
 
@@ -27,14 +30,16 @@ class authUser{
 
   Future loginUser(String loginEmail, String loginPassword) async {
     try{
-      final userCredential = await _auth.signInWithEmailAndPassword(
+      auth.UserCredential result = await _auth.signInWithEmailAndPassword(
         email: loginEmail,
         password: loginPassword,
       );
-      print(userCredential);
-    } on FirebaseAuthException catch (e){
-      rethrow;
+      auth.User? user = result.user;
+      print(result);
+      return _getUserFromFirebase(user);
+    } on auth.FirebaseAuthException catch (e){
       print(e);
+      rethrow;
     }
 
   }
