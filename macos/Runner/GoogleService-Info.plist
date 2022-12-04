@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>713350924154-94a7na3c1grgg47hpco7l1na8pcpqnap.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.713350924154-94a7na3c1grgg47hpco7l1na8pcpqnap</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB1cXr7iBJ59UwIAzIDqXQIPhY1HBsOfiU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>713350924154</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.hydromon</string>
+	<key>PROJECT_ID</key>
+	<string>hydromon-backend</string>
+	<key>STORAGE_BUCKET</key>
+	<string>hydromon-backend.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:713350924154:ios:d0bebae4c1fd801fe078c3</string>
+	<key>DATABASE_URL</key>
+	<string>https://hydromon-backend-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+</dict>
+</plist>
