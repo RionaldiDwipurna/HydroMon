@@ -75,11 +75,6 @@ class _RegisterEmailState extends State<RegisterEmail> {
     );
   }
 
-  void validate(String email, String password){
-
-
-
-  }
 
   @override
   void initState() {
